@@ -6,7 +6,7 @@ import {
   ToolMessage,
   SystemMessage,
 } from "@langchain/core/messages";
-import { getTools } from "./tools";
+import { getTools } from "../tools";
 import { readFileSync } from "fs";
 import { join } from "path";
 

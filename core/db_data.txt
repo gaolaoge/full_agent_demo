@@ -1,3 +1,15 @@
+================================================================================
+Chroma 数据库集合: undefined
+文档总数: 17
+获取时间: 2026-01-15T14:22:35.164Z
+================================================================================
+
+
+[文档 1/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-0
+
+内容:
 {
   "title": "全栈 AI 代理系统技术文档",
   "version": "1.0.0",
@@ -7,13 +19,63 @@
       "id": "introduction",
       "title": "系统介绍",
       "content": "这是一个基于 Next.js 和 LangChain 构建的全栈 AI 代理系统。系统支持多种工具调用、RAG（检索增强生成）功能，以及流式响应。核心特性包括：1) 多工具集成 - 支持天气查询、时间获取等外部工具；2) RAG 能力 - 通过向量数据库实现知识检索；3) 流式输出 - 实时响应用户查询；4) 可扩展架构 - 易于添加新工具和功能模块。",
-      "keywords": ["Next.js", "LangChain", "AI Agent", "RAG", "Streaming"]
+      "keywords": [
+        "Next.js",
+        "LangChain",
+        "AI Agent",
+        "RAG",
+        "Streaming"
+      ]
+    },
+    {
+
+元数据:
+{
+  "embeddingDimension": 768,
+  "textLength": 490,
+  "index": 0
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0185, 0.0427, -0.1402, -0.0721, -0.0245...]
+
+
+[文档 2/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-1
+
+内容:
+"LangChain",
+        "AI Agent",
+        "RAG",
+        "Streaming"
+      ]
     },
     {
       "id": "architecture",
       "title": "系统架构",
       "content": "系统采用分层架构设计。前端层使用 Next.js 14 和 React 18，提供现代化的用户界面。API 层通过 Next.js API Routes 处理请求，支持 Server-Sent Events (SSE) 实现流式响应。核心层包含 DeepSeekModel 类，封装了与 DeepSeek API 的交互逻辑，支持工具调用和消息流式处理。工具层提供可插拔的工具系统，每个工具都实现了统一的接口规范。RAG 层负责文档加载、文本分割、向量化和检索功能。",
       "components": [
+        {
+          "name": "DeepSeekModel",
+
+元数据:
+{
+  "textLength": 460,
+  "index": 1,
+  "embeddingDimension": 768
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [-0.0069, 0.0320, -0.1038, -0.0668, 0.0080...]
+
+
+[文档 3/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-2
+
+内容:
+"components": [
         {
           "name": "DeepSeekModel",
           "description": "核心模型类，负责与 AI 模型交互",
@@ -26,23 +88,116 @@
         {
           "name": "Tool System",
           "description": "工具系统，支持动态工具注册和调用",
-          "tools": ["GetWeatherTool", "GetCurrentTimeTool"]
+          "tools": [
+            "GetWeatherTool",
+            "GetCurrentTimeTool"
+          ]
+        },
+        {
+          "name": "RAG Pipeline",
+
+元数据:
+{
+  "textLength": 487,
+  "index": 2,
+  "embeddingDimension": 768
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [-0.0036, 0.0181, -0.1431, -0.0720, 0.0392...]
+
+
+[文档 4/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-3
+
+内容:
+"GetCurrentTimeTool"
+          ]
         },
         {
           "name": "RAG Pipeline",
           "description": "检索增强生成管道",
-          "steps": ["文档加载", "文本分割", "向量化", "向量存储", "检索链"]
+          "steps": [
+            "文档加载",
+            "文本分割",
+            "向量化",
+            "向量存储",
+            "检索链"
+          ]
         }
       ]
     },
     {
       "id": "rag-implementation",
       "title": "RAG 实现详解",
+
+元数据:
+{
+  "textLength": 346,
+  "embeddingDimension": 768,
+  "index": 3
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0109, 0.0325, -0.1645, -0.1132, 0.0086...]
+
+
+[文档 5/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-4
+
+内容:
+}
+      ]
+    },
+    {
+      "id": "rag-implementation",
+      "title": "RAG 实现详解",
       "content": "RAG（Retrieval-Augmented Generation）实现包含五个关键步骤。第一步是文档加载，使用 TextLoader 等文档加载器从各种格式（JSON、Markdown、PDF 等）加载文档内容。第二步是文本分割，使用 RecursiveCharacterTextSplitter 将长文档分割成较小的文本块，每个块的大小和重叠度可以配置，默认 chunkSize 为 1000 字符，chunkOverlap 为 200 字符。第三步是嵌入向量化，使用 OpenAI 或本地嵌入模型将文本块转换为高维向量表示。第四步是创建向量存储，将向量存入 Chroma、Pinecone 等向量数据库。第五步是构建检索链，当用户提问时，将问题向量化，在向量库中检索最相关的文本块，然后将检索到的文本块与问题组合成提示，最后调用 LLM 生成最终答案。",
-      "codeExample": {
+
+元数据:
+{
+  "index": 4,
+  "embeddingDimension": 768,
+  "textLength": 484
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0045, 0.0441, -0.1631, -0.1075, -0.0026...]
+
+
+[文档 6/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-5
+
+内容:
+"codeExample": {
         "language": "typescript",
         "code": "import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';\n\nconst splitter = new RecursiveCharacterTextSplitter({\n  chunkSize: 1000,\n  chunkOverlap: 200\n});\n\nconst chunks = await splitter.splitText(documentText);"
       }
+    },
+    {
+      "id": "tools-integration",
+      "title": "工具集成机制",
+
+元数据:
+{
+  "textLength": 383,
+  "embeddingDimension": 768,
+  "index": 5
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [-0.0095, 0.0292, -0.1246, -0.1047, 0.0452...]
+
+
+[文档 7/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-6
+
+内容:
+}
     },
     {
       "id": "tools-integration",
@@ -53,6 +208,26 @@
         "description": "获取指定城市的天气信息",
         "parameters": {
           "city": "string - 城市名称",
+
+元数据:
+{
+  "textLength": 449,
+  "embeddingDimension": 768,
+  "index": 6
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0202, 0.0162, -0.1266, -0.0552, 0.0080...]
+
+
+[文档 8/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-7
+
+内容:
+"description": "获取指定城市的天气信息",
+        "parameters": {
+          "city": "string - 城市名称",
           "unit": "string - 温度单位 (celsius/fahrenheit)"
         },
         "returns": "WeatherInfo - 包含温度、湿度、天气状况等信息"
@@ -61,8 +236,49 @@
     {
       "id": "streaming-response",
       "title": "流式响应实现",
+
+元数据:
+{
+  "index": 7,
+  "textLength": 285,
+  "embeddingDimension": 768
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0015, 0.0262, -0.1774, -0.0501, 0.0381...]
+
+
+[文档 9/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-8
+
+内容:
+}
+    },
+    {
+      "id": "streaming-response",
+      "title": "流式响应实现",
       "content": "流式响应通过 Server-Sent Events (SSE) 实现，允许服务器向客户端推送实时数据。当用户发送消息时，API 路由创建 DeepSeekModel 实例，调用 createStreamingResponse 方法生成 ReadableStream。流中的每个数据块都包含类型标识（content、thinking、error）和相应的内容。前端通过 EventSource API 或 fetch API 的流式读取功能接收数据，实时更新 UI。这种设计提供了更好的用户体验，用户无需等待完整响应即可看到部分结果。系统还支持思考过程（thinking）的流式输出，让用户了解模型的推理过程。",
       "streamFormat": {
+        "type": "content | thinking | error",
+
+元数据:
+{
+  "index": 8,
+  "textLength": 468,
+  "embeddingDimension": 768
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [-0.0129, 0.0533, -0.1602, -0.0332, 0.0524...]
+
+
+[文档 10/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-9
+
+内容:
+"streamFormat": {
         "type": "content | thinking | error",
         "content": "string - 实际内容",
         "error": "string - 错误信息（仅当 type 为 error 时）"
@@ -71,18 +287,78 @@
     {
       "id": "deployment",
       "title": "部署指南",
+
+元数据:
+{
+  "index": 9,
+  "embeddingDimension": 768,
+  "textLength": 221
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0148, 0.0138, -0.1367, -0.0571, 0.1019...]
+
+
+[文档 11/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-10
+
+内容:
+}
+    },
+    {
+      "id": "deployment",
+      "title": "部署指南",
       "content": "系统可以部署到多种平台。Vercel 部署是最简单的方案，只需连接 GitHub 仓库，Vercel 会自动检测 Next.js 项目并完成构建和部署。环境变量需要在 Vercel 控制台配置，包括 DEEP_SEEK_API_KEY 等敏感信息。Docker 部署适合自托管场景，需要创建 Dockerfile 和多阶段构建配置。生产环境建议启用 HTTPS、配置 CDN 加速静态资源、设置适当的缓存策略。监控和日志记录也很重要，可以使用 Vercel Analytics 或自建监控系统追踪系统性能和错误。",
       "requirements": {
         "nodeVersion": ">= 18.0.0",
         "packageManager": "pnpm (推荐) 或 npm/yarn",
-        "environmentVariables": ["DEEP_SEEK_API_KEY"]
+        "environmentVariables": [
+
+元数据:
+{
+  "embeddingDimension": 768,
+  "textLength": 484,
+  "index": 10
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [-0.0060, 0.0140, -0.1538, -0.0505, 0.0087...]
+
+
+[文档 12/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-11
+
+内容:
+"packageManager": "pnpm (推荐) 或 npm/yarn",
+        "environmentVariables": [
+          "DEEP_SEEK_API_KEY"
+        ]
       }
     },
     {
       "id": "best-practices",
       "title": "最佳实践",
       "content": "开发 AI 代理系统时，有几个关键的最佳实践需要遵循。首先是错误处理，所有异步操作都应该有适当的错误捕获和用户友好的错误消息。其次是安全性，API 密钥等敏感信息必须存储在环境变量中，永远不要提交到代码仓库。第三是性能优化，对于频繁调用的工具，应该实现缓存机制；对于大型文档的 RAG 检索，应该使用合适的 chunkSize 和 chunkOverlap 参数。第四是用户体验，提供清晰的加载状态、错误提示和流式输出反馈。第五是可维护性，代码应该模块化，工具和组件应该易于扩展和测试。最后是文档完整性，每个函数、类和模块都应该有清晰的注释和文档说明。",
-      "checklist": [
+
+元数据:
+{
+  "textLength": 486,
+  "embeddingDimension": 768,
+  "index": 11
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0206, 0.0315, -0.1397, -0.0612, 0.0074...]
+
+
+[文档 13/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-12
+
+内容:
+"checklist": [
         "实现全面的错误处理机制",
         "使用环境变量管理敏感配置",
         "优化 RAG 检索性能（合适的 chunk 大小）",
@@ -94,12 +370,69 @@
     {
       "id": "future-enhancements",
       "title": "未来增强计划",
+
+元数据:
+{
+  "embeddingDimension": 768,
+  "textLength": 258,
+  "index": 12
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [-0.0290, 0.0292, -0.1564, -0.0325, 0.0533...]
+
+
+[文档 14/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-13
+
+内容:
+]
+    },
+    {
+      "id": "future-enhancements",
+      "title": "未来增强计划",
       "content": "系统未来计划添加多个增强功能。多模态支持将允许系统处理图像、音频等非文本输入。记忆系统将实现对话历史的持久化存储，让模型能够记住之前的对话内容。更强大的 RAG 功能将支持多种向量数据库后端、混合检索策略（关键词+向量）、以及查询重写和结果重排序。工具系统将支持动态工具发现和注册，允许运行时添加新工具。性能优化方面，计划实现响应缓存、批量处理、以及更智能的 chunk 分割策略。用户体验方面，将添加对话导出、主题切换、以及更丰富的交互方式。",
       "roadmap": {
-        "Q1": ["多模态支持", "记忆系统基础版本"],
-        "Q2": ["增强 RAG 功能", "动态工具系统"],
-        "Q3": ["性能优化", "用户体验改进"],
-        "Q4": ["企业级功能", "API 开放平台"]
+        "Q1": [
+          "多模态支持",
+          "记忆系统基础版本"
+        ],
+        "Q2": [
+          "增强 RAG 功能",
+          "动态工具系统"
+        ],
+        "Q3": [
+
+元数据:
+{
+  "textLength": 488,
+  "index": 13,
+  "embeddingDimension": 768
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [-0.0257, 0.0678, -0.1273, -0.0490, 0.0206...]
+
+
+[文档 15/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-14
+
+内容:
+],
+        "Q2": [
+          "增强 RAG 功能",
+          "动态工具系统"
+        ],
+        "Q3": [
+          "性能优化",
+          "用户体验改进"
+        ],
+        "Q4": [
+          "企业级功能",
+          "API 开放平台"
+        ]
       }
     }
   ],
@@ -108,7 +441,37 @@
     "license": "MIT",
     "repository": "https://github.com/example/full-agent-demo",
     "contact": "support@example.com",
-    "tags": ["AI", "LLM", "RAG", "Next.js", "LangChain", "TypeScript"]
+    "tags": [
+      "AI",
+      "LLM",
+      "RAG",
+      "Next.js",
+      "LangChain",
+
+元数据:
+{
+  "textLength": 479,
+  "index": 14,
+  "embeddingDimension": 768
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [-0.0069, 0.0589, -0.1812, -0.0401, 0.0795...]
+
+
+[文档 16/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-15
+
+内容:
+"tags": [
+      "AI",
+      "LLM",
+      "RAG",
+      "Next.js",
+      "LangChain",
+      "TypeScript"
+    ]
   },
   "appendix": {
     "glossary": {
@@ -120,9 +483,41 @@
     },
     "references": [
       "LangChain Documentation: https://js.langchain.com",
+
+元数据:
+{
+  "index": 15,
+  "textLength": 478,
+  "embeddingDimension": 768
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0202, 0.0725, -0.1287, -0.0926, -0.0095...]
+
+
+[文档 17/17]
+--------------------------------------------------------------------------------
+ID: doc-1768485412580-16
+
+内容:
+},
+    "references": [
+      "LangChain Documentation: https://js.langchain.com",
       "Next.js Documentation: https://nextjs.org/docs",
       "DeepSeek API: https://platform.deepseek.com",
       "RAG Paper: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
     ]
   }
 }
+
+元数据:
+{
+  "embeddingDimension": 768,
+  "textLength": 286,
+  "index": 16
+}
+
+嵌入向量维度: 768
+嵌入向量前 5 个值: [0.0016, 0.0153, -0.1603, -0.1048, 0.0322...]
+
+

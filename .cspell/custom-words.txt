@@ -31,3 +31,7 @@ zoomable
 deepseek
 adcode
 Uapi
+textsplitters
+nomic
+chromadb
+metadatas

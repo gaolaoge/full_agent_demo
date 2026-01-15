@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { DeepSeekModel } from "@/core";
+import { RAGModel } from "@/core";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -8,14 +8,8 @@ export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
 
-    const apiKey = process.env.DEEP_SEEK_API_KEY;
-    if (!apiKey) {
-      return new Response(
-        JSON.stringify({ error: "DEEP_SEEK_API_KEY is not set" }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
-      );
-    }
-    const model = new DeepSeekModel(apiKey);
+    // Ollama 是本地运行的，不需要 API key
+    const model = new RAGModel();
     const readableStream = await model.createStreamingResponse(messages);
 
     return new Response(readableStream, {
