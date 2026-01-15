@@ -1,7 +1,10 @@
+import { tool } from "@langchain/core/tools";
+import { z } from "zod";
+
 /**
  * 获取当前时间的工具
  */
-export class GetCurrentTimeTool {
+class GetCurrentTimeTool {
   /**
    * 获取当前时间（本地时间）
    * @returns 格式化的时间字符串
@@ -86,3 +89,31 @@ export class GetCurrentTimeTool {
     return `${timeString} (${timezone})`;
   }
 }
+
+/**
+ * 获取当前时间的 LangChain 工具
+ */
+const getCurrentTimeTool = tool(
+  async () => {
+    return GetCurrentTimeTool.getCurrentTime();
+  },
+  {
+    name: "get_current_time",
+    description: "获取当前的日期和时间（中国时区，格式：YYYY-MM-DD HH:mm:ss）",
+  }
+);
+
+/**
+ * 获取当前时间戳的 LangChain 工具
+ */
+const getCurrentTimestampTool = tool(
+  async () => {
+    return GetCurrentTimeTool.getCurrentTimestamp().toString();
+  },
+  {
+    name: "get_current_timestamp",
+    description: "获取当前的时间戳（毫秒）",
+  }
+);
+
+export { getCurrentTimeTool, getCurrentTimestampTool };

@@ -32,7 +32,6 @@ export default function Home() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
-    console.log("gaoge messages: ", messages);
     setInput("");
     setIsLoading(true);
 

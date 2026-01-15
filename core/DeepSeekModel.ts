@@ -37,7 +37,7 @@ export class DeepSeekModel {
 
     // Load system prompt from markdown file
     try {
-      const promptPath = join(process.cwd(), "core", "SYSTEM_PROMPT.md");
+      const promptPath = join(process.cwd(), "static", "SYSTEM_PROMPT.md");
       this.systemPrompt = readFileSync(promptPath, "utf-8");
       // Remove markdown headers and keep only the content
       this.systemPrompt = this.systemPrompt.replace(/^#+\s+.*$/gm, "").trim();

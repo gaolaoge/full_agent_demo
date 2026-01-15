@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { DeepSeekModel } from "@/core/DeepSeekModel";
+import { DeepSeekModel } from "@/core";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -15,7 +15,6 @@ export async function POST(req: NextRequest) {
         { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
-
     const model = new DeepSeekModel(apiKey);
     const readableStream = await model.createStreamingResponse(messages);
 

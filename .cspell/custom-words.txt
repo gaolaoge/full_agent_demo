@@ -29,3 +29,5 @@ xiaoer
 xyflow
 zoomable
 deepseek
+adcode
+Uapi
