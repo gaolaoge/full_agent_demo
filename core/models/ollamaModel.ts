@@ -50,9 +50,9 @@ export class OllamaModel {
     });
 
     this.baseModel = new ChatOllama({
-      model: "qwen2.5:1.5b",
+      model: process.env.OLLAMA_MODEL,
       temperature: 0.7,
-      baseUrl: process.env.OLLAMA_BASE_URL || "http://localhost:11434",
+      baseUrl: process.env.OLLAMA_BASE_URL,
     });
 
     this.model = this.baseModel.bindTools(this.tools);

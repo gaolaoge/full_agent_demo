@@ -34,7 +34,10 @@ export interface RetrievalResult {
  * @param retrievedDocs 检索到的文档
  * @returns 组合后的提示
  */
-function buildPrompt(query: string, retrievedDocs: Array<{ content: string; metadata: Record<string, any> }>): string {
+function buildPrompt(
+  query: string,
+  retrievedDocs: Array<{ content: string; metadata: Record<string, any> }>
+): string {
   const contextSections = retrievedDocs
     .map((doc, index) => {
       return `[文档 ${index + 1}]\n${doc.content}`;
@@ -63,7 +66,8 @@ export async function executeRetrievalChain(
 ): Promise<RetrievalResult> {
   const {
     collectionName = process.env.CHROMA_COLLECTION || "rag-documents",
-    embeddingType = (process.env.EMBEDDING_TYPE as EmbeddingModelType) || "ollama",
+    embeddingType = (process.env.EMBEDDING_TYPE as EmbeddingModelType) ||
+      "ollama",
     k = 4,
     chromaHost = process.env.CHROMA_HOST || "localhost",
     chromaPort = parseInt(process.env.CHROMA_PORT || "8000"),
@@ -101,16 +105,14 @@ export async function executeRetrievalChain(
   let answer = "";
 
   await new Promise<void>((resolve, reject) => {
-    model.streamChat(
-      [{ role: "user", content: prompt }],
-      (chunk) => {
+    model
+      .streamChat([{ role: "user", content: prompt }], (chunk) => {
         if (chunk.type === "content") {
           answer += chunk.content || "";
         } else if (chunk.type === "error") {
           reject(new Error(chunk.error));
         }
-      }
-    )
+      })
       .then(() => resolve())
       .catch(reject);
   });
@@ -130,12 +132,18 @@ export async function executeRetrievalChain(
  */
 export async function executeRetrievalChainStream(
   query: string,
-  onChunk: (chunk: { type: "retrieval" | "content" | "error"; content?: string; error?: string; documents?: Array<{ content: string; metadata: Record<string, any> }> }) => void,
+  onChunk: (chunk: {
+    type: "retrieval" | "content" | "error";
+    content?: string;
+    error?: string;
+    documents?: Array<{ content: string; metadata: Record<string, any> }>;
+  }) => void,
   options: RetrievalChainOptions = {}
 ): Promise<void> {
   const {
     collectionName = process.env.CHROMA_COLLECTION || "rag-documents",
-    embeddingType = (process.env.EMBEDDING_TYPE as EmbeddingModelType) || "ollama",
+    embeddingType = (process.env.EMBEDDING_TYPE as EmbeddingModelType) ||
+      "ollama",
     k = 4,
     chromaHost = process.env.CHROMA_HOST || "localhost",
     chromaPort = parseInt(process.env.CHROMA_PORT || "8000"),
@@ -147,7 +155,7 @@ export async function executeRetrievalChainStream(
   try {
     // 第 1 步：将用户问题向量化并在向量库中检索最相关的文本块
     onChunk({ type: "retrieval", content: "正在检索相关文档..." });
-    
+
     const retrievedDocs = await searchSimilarDocuments(
       query,
       k,
@@ -179,17 +187,14 @@ export async function executeRetrievalChainStream(
 
     // 第 3 步：调用 LLM 生成最终答案（流式）
     const model = new OllamaModel();
-    
-    await model.streamChat(
-      [{ role: "user", content: prompt }],
-      (chunk) => {
-        if (chunk.type === "content") {
-          onChunk({ type: "content", content: chunk.content });
-        } else if (chunk.type === "error") {
-          onChunk({ type: "error", error: chunk.error });
-        }
+
+    await model.streamChat([{ role: "user", content: prompt }], (chunk) => {
+      if (chunk.type === "content") {
+        onChunk({ type: "content", content: chunk.content });
+      } else if (chunk.type === "error") {
+        onChunk({ type: "error", error: chunk.error });
       }
-    );
+    });
   } catch (error: any) {
     onChunk({
       type: "error",

@@ -23,9 +23,7 @@ export function createEmbeddings(
   if (type === "ollama") {
     // 使用更常见的嵌入模型，如果 nomic-embed-text 不可用，可以尝试 all-minilm
     const defaultModel =
-      options?.model ||
-      process.env.OLLAMA_EMBEDDING_MODEL ||
-      "nomic-embed-text";
+      options?.model || process.env.EMBEDDING_MODEL || "nomic-embed-text";
     return new OllamaEmbeddings({
       model: defaultModel,
       baseUrl:
@@ -36,7 +34,7 @@ export function createEmbeddings(
   } else {
     return new OpenAIEmbeddings({
       model: options?.model || "text-embedding-3-small",
-      openAIApiKey: options?.apiKey || process.env.OPENAI_API_KEY,
+      openAIApiKey: options?.apiKey,
     });
   }
 }
